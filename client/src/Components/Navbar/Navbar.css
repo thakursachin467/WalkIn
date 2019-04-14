@@ -1,0 +1,30 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #b8b4b4;
+    background-color: #c9c2c2;
+    height: 5%;
+}
+
+li {
+    float: left;
+}
+
+li .NavLinks {
+    display: block;
+    color: rgb(155, 155, 155);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li .NavLinks:hover:not(.active) {
+    background-color: rgb(182, 175, 175);
+}
+
+li  .active {
+    color: white;
+    background-color: rgb(103, 103, 145);
+}
