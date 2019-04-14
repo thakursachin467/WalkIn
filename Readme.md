@@ -20,4 +20,10 @@ Run  `sh startup.sh`
 
 
 
+### After Install and running
+
+after successfully running the application go to http://localhost:5000/api-docs/
+
+
+
 

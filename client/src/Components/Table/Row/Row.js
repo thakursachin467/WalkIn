@@ -1,15 +1,15 @@
 import React from 'react'
 import {  Table } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
-const storeId=12
-const TableRow=(props)=>{
+
+const TableRow=({data={}})=>{
+    const {name,_id,location:{latitude,longitude}}= data;
   return(
       <Table.Row>
-          <Table.Cell>John Lilki</Table.Cell>
-          <Table.Cell>September 14, 2013</Table.Cell>
-          <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+          <Table.Cell>{name}</Table.Cell>
+          <Table.Cell>Latitude: {latitude}  , Longitude: {longitude}</Table.Cell>
           <Table.Cell>
-              <Link to={`/store/${storeId}`}>See all Subscribers</Link>
+              <Link to={`/store/${_id}`}>See all Subscribers</Link>
           </Table.Cell>
       </Table.Row>
   )

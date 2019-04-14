@@ -1,32 +1,35 @@
-/**
- * @swagger
- *definitions:
- *  user:
- *    type: "object"
- *    properties:
- *     id:
- *       type: "integer"
- *       description: "Unique  id for a sigle document"
- *     email:
- *       type: "integer"
- *       description: "email of  the user"
- *     password:
- *       type: "integer"
- *       description: "Password of  the user"
- *     phone:
- *       type: "string"
- *       description: "Phone Number of  the user"
- *     role:
- *       type: "array"
- *       description: "Reference to the role assign to this user"
- *       default: "Standard"
- *     name:
- *       type: "object"
- *       description: "Name of the user"
- *       properties:
- *          firstName:
- *             type: "string"
- *          lastName:
- *             type: "string"
+/** @swagger
+ * /appmetrics-dash:
+ *   get:
+ *     summary: "Show the status of the  node application"
+ *     description: "Show the status of the  node application"
+ */
+
+
+/** @swagger
+ * /webhook/sendSms:
+ *   post:
+ *     summary: "Send SMS to a number "
+ *     description: "Send SMS to a number"
+ *     parameters:
+ *         - name: body
+ *           in: body
+ *           description: SMS SENDING WEBHOOK
+ *           required: true
+ *           type: object
+ *           schema:
+ *              type: object
+ *              properties:
+ *                 location:
+ *                     type: Object
+ *                     properties:
+ *                        latitude:
+ *                           type: string
+ *                        longitude:
+ *                           type: string
+ *                 phone_number:
+ *                     type: number
+ *                 detection_time:
+ *                     type: Date
  *
  */

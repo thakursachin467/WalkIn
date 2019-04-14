@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import Loader from '../../Components/Loader/Loader';
-import Table from "../Home/Home";
+import Table from "../../Components/TableUser/Table";
 class StoreOwner extends Component {
     constructor(props){
         super(props);
         this.state={
-            loading: false
+            loading: false,
+            data:[]
         }
     }
+
+    sendSms =(userId)=>{
+        console.log(userId,this.props.match.params.id);
+    };
+
     componentDidMount() {
-        this.setState({loading:true});
         const storeId= this.props.match.params.id;
         fetch(`http://localhost:5000/api/subscribers/${storeId}`,{
             method: 'GET',
@@ -17,8 +22,11 @@ class StoreOwner extends Component {
                 'Content-Type':'application/json',
             }
         }).then(res=>{
-            this.setState({loading:false});
-            console.log(res);
+           res.json()
+               .then((data)=>{
+                   this.setState({loading:false});
+                   this.setState({data:data.data});
+               })
         })
             .catch(err=>{
                 this.setState({loading:false});
@@ -27,10 +35,10 @@ class StoreOwner extends Component {
 
     }
     render() {
-        const {loading}= this.state;
+        const {loading,data}= this.state;
         let content=<Loader/>;
         if(!loading){
-            content = <Table/>
+            content = <Table data={data} sendSms={this.sendSms} />
         }
 
         return (

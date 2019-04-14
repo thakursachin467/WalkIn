@@ -4,6 +4,7 @@ require('appmetrics-dash').attach({
 require('appmetrics-prometheus').attach();
 const log4js = require('log4js');
 const express= require('express');
+const cors = require('cors')
 const app = express();
 const mongoose= require('mongoose');
 const bodyParser = require('body-parser');
@@ -17,11 +18,14 @@ const Notification= require('./routes/webhooks/Notification');
 const appName = require('./package').name;
 const logger = log4js.getLogger(appName);
 const Keys= require('./Config/Credintials/index');
+const swaggerDoc = require('./swaggerDoc');
 
 
 logger.level = Keys.LOG_LEVEL || 'info';
 
 app.use(log4js.connectLogger(logger, { level: logger.level }));
+
+app.use(cors());
 
 app.use((request,response,next)=>{
     const authHeader= request.get('Authorization');
@@ -54,6 +58,7 @@ app.use('/api/auth/',auth);
 app.use('/api/webhook/',Notification);
 app.use('/api/stores/',Stores);
 app.use('/api/subscribers/',Subscribers);
+swaggerDoc(app);
 
 
 

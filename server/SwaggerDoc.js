@@ -11,7 +11,7 @@ const options = {
             description: "WalkIn Assignment"
         },
         basePath: '/api',
-        host: "http://localhost:5000/"
+        host: "http://localhost:5000"
 
     },
     apis: ['./Swagger.js']

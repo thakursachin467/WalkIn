@@ -6,19 +6,24 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.state={
-            loading: false
+            loading: false,
+            stores:[]
         }
     }
     componentDidMount() {
-        this.setState({loading:true})
+        this.setState({loading:true});
         fetch('http://localhost:5000/api/stores/all',{
             method: 'GET',
             headers:{
                 'Content-Type':'application/json',
             }
         }).then(res=>{
-            this.setState({loading:false});
-            console.log(res);
+            res.json()
+                .then((data)=>{
+                    this.setState({loading:false});
+                   this.setState({stores:data.data});
+                })
+
         })
             .catch(err=>{
                 this.setState({loading:false});
@@ -28,10 +33,10 @@ class Home extends Component {
     }
 
     render() {
-        const {loading}= this.state;
+        const {loading,stores}= this.state;
         let content=<Loader/>;
         if(!loading){
-            content = <Table/>
+            content = <Table stores={stores}/>
         }
 
         return (
