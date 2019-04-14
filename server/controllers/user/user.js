@@ -20,6 +20,21 @@ exports.getUsers=(request,response,next)=>{
         subscribed: storeId
     };
     User.findUsers(filter,(err,result)=>{
-
+        if(err){
+            return response
+                .status(400)
+                .send({
+                    success:false,
+                    errors:{
+                        message:'Something Went Wrong!'
+                    }
+                })
+        }
+        return response
+            .status(200)
+            .send({
+                success: true,
+                data:result
+            })
     });
 };

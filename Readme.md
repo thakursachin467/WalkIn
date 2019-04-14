@@ -24,6 +24,8 @@ Run  `sh startup.sh`
 
 after successfully running the application go to http://localhost:5000/api-docs/
 
+Go to http://localhost:5000/api/appmetrics-dash for Application Metrics i.e. number of HTTP Incoming Requests, Memory usage, CPU usage etc
+
 
 
 
