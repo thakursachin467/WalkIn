@@ -1,4 +1,6 @@
-require('appmetrics-dash').attach();
+require('appmetrics-dash').attach({
+    url:'/api/appmetrics-dash'
+});
 require('appmetrics-prometheus').attach();
 const log4js = require('log4js');
 const express= require('express');
@@ -7,16 +9,19 @@ const mongoose= require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Sentry = require('@sentry/node');
-const Keys= process.env || require('./Config/Credintials/keys');
-const auth= require('./routes/user/Auth');
 const PORT= process.env.PORT || 5000;
-const appName = require('./../package').name;
+const auth= require('./routes/user/Auth');
+const Stores= require('./routes/owner/owner');
+const Subscribers= require('./routes/user/user');
+const Notification= require('./routes/webhooks/Notification');
+const appName = require('./package').name;
 const logger = log4js.getLogger(appName);
+const Keys= require('./Config/Credintials/index');
+
 
 logger.level = Keys.LOG_LEVEL || 'info';
 
 app.use(log4js.connectLogger(logger, { level: logger.level }));
-
 
 app.use((request,response,next)=>{
     const authHeader= request.get('Authorization');
@@ -44,12 +49,16 @@ mongoose.connect(Keys.mongoURI)
         logger.info(`connection failed to database ${err}`)
     }));
 
+
 app.use('/api/auth/',auth);
+app.use('/api/webhook/',Notification);
+app.use('/api/stores/',Stores);
+app.use('/api/subscribers/',Subscribers);
 
 
 
 
 app.listen(PORT,()=>{
     logger.info(`APPLICATION STARTED ON PORT ${PORT}`);
-    logger.info(`App Matric Started on http://localhost:${port}/appmetrics-dash`);
+    logger.info(`App Matric Started on http://localhost:${PORT}/api/appmetrics-dash`);
 });

@@ -1,6 +1,6 @@
 .idea/
 server/node_modules
-server/Config/Credintials/
+server/heapdump-*
 
 client/node_modules
 client/.pnp
