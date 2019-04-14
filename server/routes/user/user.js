@@ -6,4 +6,8 @@ router
     .route('/:storeid')
     .get(user.getUsers);
 
+router
+    .route('/sendSms/:userId/:storeId')
+    .get(user.sendSms)
+
 module.exports= router;
