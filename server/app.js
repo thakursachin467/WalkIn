@@ -18,7 +18,7 @@ const Notification= require('./routes/webhooks/Notification');
 const appName = require('./package').name;
 const logger = log4js.getLogger(appName);
 const Keys= require('./Config/Credintials/index');
-const swaggerDoc = require('./swaggerDoc');
+const swaggerDoc = require('./SwaggerDoc');
 
 
 logger.level = Keys.LOG_LEVEL || 'info';
